@@ -93,7 +93,7 @@ JB :
   analytics :
     provider : google 
     google : 
-        tracking_id : 'UA-123-12'
+        tracking_id : 'UA-28634448-1'
     # the id of the site on Piwik
 
   # Settings for sharing helper. 
