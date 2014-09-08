@@ -5,5 +5,5 @@ header: About Me
 group: navigation
 ---
  * **Name:** Abdala Cerqueira
- * **Github:** [About Me](http://about.me/abdala)
+ * **About Me:** [Abdala](http://about.me/abdala)
  * **Github:** [Abdala](https://github.com/abdala)
