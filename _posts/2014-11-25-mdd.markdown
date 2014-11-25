@@ -11,7 +11,7 @@ tags:
 - desenvolvimento
 ---
 
-Com esse constante debate e variadades de metodologias de desenvolvimento, parei para pensar: Qual será a metodologia que utilizo quando estou desenvolvendo sozinho? E cheguei a seguinte conclusão: é o Music Driven Development (MDD).
+Com esse constante debate e variedades de metodologias de desenvolvimento, parei para pensar: Qual será a metodologia que utilizo quando estou desenvolvendo sozinho? E cheguei a seguinte conclusão: é o Music Driven Development (MDD).
 
 Explico. Geralmente coloco músicas para programar e ultimamente tenho percebido que, dependendo da situação que me encontro, a música que está tocando faz total diferença na minha produtividade e concentração. 
 
@@ -19,13 +19,13 @@ Explico. Geralmente coloco músicas para programar e ultimamente tenho percebido
 
 No meu caso é mais ou menos assim:
 
-Dias normais, com trabalho moderado, coisas pendentes para serem feitas, mas nada urgente. Mundo feliz. MPB. Nada melhor que MPB para acompanhar o seu momento de escrita: Gil, Marisa Monte, Luciana Mello, João Bosco, Marcelo Jeneci. Da tempo até de pensar nos bons momentos e pequenas pausas para cantar junto. Me lembro dos tempos de Agência Click, onde compartilhavamos(Eu e Igor Moreno) músicas, com splits de P2.
+Dias normais, com trabalho moderado, coisas pendentes para serem feitas, mas nada urgente. Mundo feliz. MPB. Nada melhor que MPB para acompanhar o seu momento de escrita: Gil, Marisa Monte, Luciana Mello, João Bosco, Marcelo Jeneci. Da tempo até de pensar nos bons momentos e pequenas pausas para cantar junto. Me lembro dos tempos de Agência Click, onde compartilhávamos(Eu e Igor Moreno) músicas, com splits de P2.
 
 Em outra circunstância, estou com vários problemas ao mesmo tempo, todos com prioridades altíssimas e ainda tenho que visitar um cliente no fim do dia. Coloco um System Of a Down, Metacrose ou outra pedrada qualquer. Os problemas são resolvidos e chego no cliente do fim do dia cantando. **Obs: só funciona se o volume estiver no último, caso contrário, não terá efeito.**
 
 Momento de planejamento e criação de novas arquiteturas/sistemas. Geralmente acompanhado de Neo Soul, Classic Jazz, R&B. Corinne Bailey Rae, John Legend, Joss Stone. Músicas leves que não tiram a sua atenção e trazem calma para pensar.
 
-Dias que não tem nada para fazer, - sim, eles existem - randômico da biblioteca inteira. Saem várias pérolas. É divetido.
+Dias que não tem nada para fazer, - sim, eles existem - randômico da biblioteca inteira. Saem várias pérolas. É divertido.
 
 Para estudar: não gosto de escutar músicas nesse momento e geralmente vejo muitos vídeos, o que acaba atrapalhando o áudio da música.
 
@@ -33,7 +33,7 @@ Para estudar: não gosto de escutar músicas nesse momento e geralmente vejo mui
 
 Nesses anos de passagens por várias empresas, presenciei coisas que não se encaixam no meu MDD. Música eletrônica nunca combinou com meu momento de programação. Já vi pessoas escutando Funk Carioca, Axé, Sertanejo e, até mesmo Djavú. Coisas que, talvez, eu até escutaria em um ambiente que não fosse de programação.
 
-Mas fiquei tranquilo, diferente de outras metodologias, o MDD não tem regras e vc faz/escuta o que quizer.
+Mas fiquei tranquilo, diferente de outras metodologias, o MDD não tem regras e você faz/escuta o que quiser.
 
 ## Compartilhamento musical
 
