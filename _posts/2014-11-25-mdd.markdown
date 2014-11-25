@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Music Driven Develpment (MDD) 
+title:  Music Driven Development (MDD) 
 date:   2014-11-25 15:50:00
 author: Abdala Cerqueira
 categories: 
