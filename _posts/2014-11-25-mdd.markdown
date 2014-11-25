@@ -33,7 +33,7 @@ Para estudar: não gosto de escutar músicas nesse momento e geralmente vejo mui
 
 Nesses anos de passagens por várias empresas, presenciei coisas que não se encaixam no meu MDD. Música eletrônica nunca combinou com meu momento de programação. Já vi pessoas escutando Funk Carioca, Axé, Sertanejo e, até mesmo Djavú. Coisas que, talvez, eu até escutaria em um ambiente que não fosse de programação.
 
-Mas fiquei tranquilo, diferente de outras metodologias, o MDD não tem regras e você faz/escuta o que quiser.
+Mas fique tranquilo, diferente de outras metodologias, o MDD não tem regras e você faz/escuta o que quiser.
 
 ## Compartilhamento musical
 
