@@ -4,8 +4,6 @@ title: PHP UK - Slides favoritos
 date: 2014-05-14 20:00:25
 author: Abdala Cerqueira
 categories: 
-- slides 
-- conferências 
 - eventos
 tags: 
 - favoritos 

@@ -4,8 +4,6 @@ title: SunshinePHP - Slides favoritos
 date: 2014-04-13 19:00:25
 author: Abdala Cerqueira
 categories: 
-- slides 
-- conferências 
 - eventos
 tags: 
 - favoritos 
