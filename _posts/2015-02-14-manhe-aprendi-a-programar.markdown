@@ -70,7 +70,7 @@ Geralmente, quando as pessoas gostam de alguma coisa, elas se juntam para poder 
 
 Atualmente frequento as comunidades de [PHP](http://php-pb.net) e [Javascript](http://paraibajs.github.io) aqui da Paraíba.
 
-Existe também um site de perguntas e respostas que é excelente. Na maioria da vezes você nem precisa fazer a pergunta, pois ela já foi respondida. Se chama [StackOverflow](stackoverflow.com).
+Existe também um site de perguntas e respostas que é excelente. Na maioria da vezes você nem precisa fazer a pergunta, pois ela já foi respondida. Se chama [StackOverflow](http://stackoverflow.com).
 
 ## Espera que depois tem mais
 
