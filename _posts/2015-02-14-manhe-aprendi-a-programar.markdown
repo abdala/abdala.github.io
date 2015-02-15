@@ -4,7 +4,7 @@ title:  Manhê! Aprendi a programar!
 date:   2015-02-14 15:50:00
 author: Abdala Cerqueira
 categories: 
-- manhê aprendi a programar
+- projetos
 tags: 
 - programação
 - dummy
@@ -75,38 +75,3 @@ Existe também um site de perguntas e respostas que é excelente. Na maioria da 
 ## Espera que depois tem mais
 
 Abra sua mente e seu coração e vamos programar. Até a próxima.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
