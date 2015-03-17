@@ -58,7 +58,7 @@ Quantidade de projetos | Linguagem de programação
 
 *Informações acessadas em 14/02/2015*
 
-Nesse universo todo de projetos, dá para ter uma boa referência de como se faz programas. Experimente buscar por projetos que são do seu interesse, como por exemplo: jogos, aplicativos para celular, eletrônica, robôtica. 
+Nesse universo todo de projetos, dá para ter uma boa referência de como se faz programas. Experimente buscar por projetos que são do seu interesse, como por exemplo: jogos, aplicativos para celular, eletrônica, robótica. 
 
 *Importante: pesquisas em inglês sempre traram mais resultados*
 
