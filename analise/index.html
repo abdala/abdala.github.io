@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <title>Análise do jogo</title>
+        <link rel="stylesheet" href="css/semantic.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <script src="javascript/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+        <table class="ui table">
+            <thead>
+                <tr>
+                    <th>Jogador</th>
+                    <th>Gols</th>
+                    <th>Chutes</th>
+                    <th>Faltas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Alex</th>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                </tr>
+                <tr>
+                    <th>Gabriel</th>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                </tr>
+                <tr>
+                    <th>Caio</th>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                </tr>
+                <tr>
+                    <th>Miguel</th>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                </tr>
+                <tr>
+                    <th>Elder</th>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                </tr>
+                <tr>
+                    <th>Ítalo</th>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                </tr>
+                <tr>
+                    <th>Lucas</th>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                </tr>
+                <tr>
+                    <th>André</th>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                </tr>
+                <tr>
+                    <th>Luquinhas</th>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                </tr>
+                <tr>
+                    <th>Serpa</th>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                    <td><button class="ui button large">0</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            var dbl = false;
+            $('button').click(function(ev){
+                if (ev.altKey) {
+                    this.innerHTML = parseInt(this.innerHTML, 10) - 1;
+                    return;
+                }
+            
+                this.innerHTML = parseInt(this.innerHTML, 10) + 1;
+            });
+        </script>
+    </body>
+</html>
