@@ -4,7 +4,7 @@ title:  Manhê! Aprendi a programar!
 date:   2015-02-14 15:50:00
 author: Abdala Cerqueira
 categories: 
-- manhê aprendi a programar
+- projetos
 tags: 
 - programação
 - dummy
@@ -58,9 +58,9 @@ Quantidade de projetos | Linguagem de programação
 
 *Informações acessadas em 14/02/2015*
 
-Nesse universo todo de projetos, dá para ter uma boa referência de como se faz programas. Experimente buscar por projetos que são do seu interesse, como por exemplo: jogos, aplicativos para celular, eletrônica, robôtica. 
+Nesse universo todo de projetos, dá para ter uma boa referência de como se faz programas. Experimente buscar por projetos que são do seu interesse, como por exemplo: jogos, aplicativos para celular, eletrônica, robótica. 
 
-*Importante: pesquisas em inglês sempre traram mais resultados*
+*Importante: pesquisas em inglês sempre trarão mais resultados*
 
 ## Comunidades
 
@@ -70,43 +70,8 @@ Geralmente, quando as pessoas gostam de alguma coisa, elas se juntam para poder 
 
 Atualmente frequento as comunidades de [PHP](http://php-pb.net) e [Javascript](http://paraibajs.github.io) aqui da Paraíba.
 
-Existe também um site de perguntas e respostas que é excelente. Na maioria da vezes você nem precisa fazer a pergunta, pois ela já foi respondida. Se chama [StackOverflow](stackoverflow.com).
+Existe também um site de perguntas e respostas que é excelente. Na maioria da vezes você nem precisa fazer a pergunta, pois ela já foi respondida. Se chama [StackOverflow](http://stackoverflow.com).
 
 ## Espera que depois tem mais
 
 Abra sua mente e seu coração e vamos programar. Até a próxima.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
