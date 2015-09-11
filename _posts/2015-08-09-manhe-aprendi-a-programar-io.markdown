@@ -74,6 +74,8 @@ Esses comandos são usados somente para mostrar qual é a versão da linguagem d
 
 Este será o nosso primeiro programa. Iremos informar um texto e o nosso programa dirá quantos caracteres foram encontrados.
 
+Agora, vamos criar 4 arquivos (contar.js, contar.php, contar.py, contar.rb) com os respectivos códigos. Um em cada uma das linguagens que citei. Você pode criá-los com um editor de texto simples, como o Bloco de Notas.
+
 ### Javascript - contar.js
 
 {% highlight javascript %}
