@@ -27,7 +27,7 @@ Então, com a linguagem de programação (software), conseguimos fazer muuuuitas
 
 Se você está lendo este site, quer dizer que você tem o necessário para começar a programar.
 
-## Vamos construir nosso primeiro programa
+## Construindo nosso primeiro programa
 
 Passei algum tempo pensando sobre nosso primeiro programa e em qual linguagem de programação iríamos escrevê-lo. Cheguei à seguinte conclusão: vamos escrever os programas inicias em 4 linguagens de programação: Javascript, PHP, Python e Ruby. Por quê? Porque, em algum momento, você terá que decidir qual é a sua linguagem favorita. Enquanto isso não acontece, vamos programando com essas.
 
@@ -38,7 +38,7 @@ A primeira coisa, antes de começar a construir o programa, é baixar e instalar
 - Python: [python.org](https://www.python.org)
 - Ruby: [ruby-lang.org](https://www.ruby-lang.org/en/)
 
-Em alguns computadores, as linguagens já podem vir pré-instaladas. É o caso dos Macs e algumas distribuições Linux. Verifique isso antes de instalar. O processo de instalação é relativamente simples. Acredito que não existirá grandes dificuldades.
+Em alguns computadores, as linguagens já podem vir pré-instaladas. É o caso dos Macs e algumas distribuições Linux. Verifique isso antes de instalar.
 
 Se, a partir desse ponto, você quiser instalar somente uma linguagem, não tem problema. Estarei sempre mostrando os próximos exemplos com todas acima.
 
@@ -46,27 +46,19 @@ Para verificar se a instalação foi feita com sucesso, abra o terminal/prompt d
 
 ### Javascript
 
-`node -v` 
-
-Saída: `v0.10.32`
+`node -v` Saída: `v0.10.32`
 
 ### PHP
 
-`php -v` 
-
-Saída: `PHP 5.6.11 (cli) (built: Jul 14 2015 16:29:05)`
+`php -v` Saída: `PHP 5.6.11 (cli) (built: Jul 14 2015 16:29:05)`
 
 ### Python
 
-`python --version` 
-
-Saída: `Python 2.7.10`
+`python --version` Saída: `Python 2.7.10`
 
 ### Ruby
 
-`ruby -v` 
-
-Saída: `ruby 2.0.0p481 (2014-05-08 revision 45883)`
+`ruby -v` Saída: `ruby 2.0.0p481 (2014-05-08 revision 45883)`
 
 Esses comandos são usados somente para mostrar qual é a versão da linguagem de programação que você tem instalada. Se as saídas forem similares às que apresentei, está tudo certo!
 
@@ -74,7 +66,12 @@ Esses comandos são usados somente para mostrar qual é a versão da linguagem d
 
 Este será o nosso primeiro programa. Iremos informar um texto e o nosso programa dirá quantos caracteres foram encontrados.
 
-Agora, vamos criar 4 arquivos (contar.js, contar.php, contar.py, contar.rb) com os respectivos códigos. Um em cada uma das linguagens que citei. Você pode criá-los com um editor de texto simples, como o Bloco de Notas.
+Agora, vamos criar 4 arquivos (contar.js, contar.php, contar.py, contar.rb) com os respectivos códigos. Você pode criá-los com um editor de texto simples, como o Bloco de Notas.
+
+Para que haja uma melhor compreensão do conteúdo dos arquivos, precisamos ver primeiro dois conceitos:
+
+1. Váriável - É um espaço reservado na memória do computador para armazenar valores. Elas devem receber nomes para poderem ser referenciadas e modificadas quando necessário.
+2. Array - É uma estrutura que armazena uma coleção valores, cada um dos elementos pode ser identificado por um índice (numeral) ou uma chave (textual).
 
 ### Javascript - contar.js
 
