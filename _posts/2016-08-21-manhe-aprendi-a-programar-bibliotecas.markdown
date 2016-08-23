@@ -12,14 +12,15 @@ tags:
 ---
 
 Para quem ainda não leu os primeiros artigos:
- - [Manhê! Aprendi a programar!](http://abda.la/projetos/2015/02/14/manhe-aprendi-a-programar)
- - [Manhê! Aprendi a programar! I/O](http://abda.la/projetos/2015/08/09/manhe-aprendi-a-programar-io)]
+
+- [Manhê! Aprendi a programar!](http://abda.la/projetos/2015/02/14/manhe-aprendi-a-programar)
+- [Manhê! Aprendi a programar! I/O](http://abda.la/projetos/2015/08/09/manhe-aprendi-a-programar-io)
 
 ## Bibliotecas
 
 Quando vamos aprendendo a programar, uma das coisas que descobrimos é que a escolha de uma biblioteca pode agiliza o desenvolvimento, mas pode também causar alguns transtornos. 
 
-A escolha e utilização de uma biblioteca pode parecer uma tarefa simples, mas muitas vezes é bem trabalhosa. Aprender sua API, Lidar com dependências, atualizações, falhas de segurança e por aí vai. Com isso em mente, colocando na balança, na maioria dos casos, a utlização de uma biblioteca ainda traz mais vantagens. Principalmente em casos que não dominamos o problema resolvido por ela.
+A escolha e utilização de uma biblioteca pode parecer uma tarefa simples, mas muitas vezes é bem trabalhosa. Aprender sua API, lidar com dependências, atualizações, falhas de segurança e por aí vai. Com isso em mente, colocando na balança, na maioria dos casos, a utlização de uma biblioteca ainda traz mais vantagens. Principalmente em casos que não dominamos o problema resolvido por ela.
 
 Veja como exemplo as bibliotecas que vamos utilizar nesse artigo, não precisamos de fato saber como a manipulação da imagem é realizada. Iremos apenas utilizar uma biblioteca que fará toda a parte mais complicada para nós.
 
@@ -68,12 +69,12 @@ Pensando em coisas que podem ser de fato úteis, vamos construir uma programa pa
 
 Agora, vamos criar 4 arquivos (redimensionar.js, redimensionar.php, redimensionar.py, redimensionar.rb) com os respectivos códigos. Você pode criá-los com um editor de texto simples, como o Bloco de Notas.
 
-Antes de executar os scripts, precisamos instalar as bibliotecas que serão utilizadas neles:
+Antes de executá-los, precisamos instalar as bibliotecas que serão utilizadas neles:
 
-Javascript: `npm install resize-img`
-PHP: `composer require imagine/imagine` (necessário ter a biblioteca Imagick ou GD instalada na máquina)
-Python: `pip install Pillow`
-Ruby: `gem install mini_magick` (necessário ter a biblioteca Imagick instalada na máquina)
+- Javascript: `npm install resize-img`
+- PHP: `composer require imagine/imagine` (necessário ter a biblioteca Imagick ou GD instalada na máquina)
+- Python: `pip install Pillow`
+- Ruby: `gem install mini_magick` (necessário ter a biblioteca Imagick instalada na máquina)
 
 Tenha paciência, esses comandos podem demorar para serem executados, pois o download das bibliotecas será feito. Só assim conseguiremos utilizá-las. Na programação não exite mágica, o código sempre terá que estar em algum lugar para ser executado. Cada gerenciador irá armazernar o código em um lugar diferente, consulte a documentação do gerenciador para localizar os arquivos caso tenha curiosidade.
 
@@ -145,6 +146,6 @@ Execução: `ruby redimensionar.rb`
 
 ## Finalizando
 
-Todos os códigos fazem referência a mesma imagem: imagem.jpg, que deve estar localizada na mesma pasta dos códigos. Isso quer dizer que nosso programa está limitado a redimensionar somente essa imagem. No artigo passado vimos como poderiamos passar parâmetros para nosso código. Então, deixo aqui aberto o desafio, fazer o nosso código funcionar de maneira dinâmica. Assim, iremos poder redimensionar qualquer imagem passada.
+Todos os códigos fazem referência a mesma imagem: imagem.jpg, que deve estar localizada na mesma pasta dos códigos. Isso quer dizer que nosso programa está limitado a redimensionar somente essa imagem. No artigo passado, vimos como poderiamos passar parâmetros para nosso código. Então, deixo aqui aberto o desafio: fazer o nosso código funcionar de maneira dinâmica. Assim, iremos poder redimensionar qualquer imagem passada.
 
 Então é isso! Bom estudo e boas descobertas!
