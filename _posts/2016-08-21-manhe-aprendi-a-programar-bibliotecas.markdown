@@ -20,7 +20,7 @@ Para quem ainda não leu os primeiros artigos:
 
 Quando estamos aprendendo a programar, uma das coisas que descobrimos é que a escolha de uma biblioteca pode agilizar o desenvolvimento, mas pode também causar alguns transtornos. 
 
-A escolha e a utilização de uma biblioteca podem parecer uma tarefa simples, mas muitas vezes é bem trabalhosa. Aprender sua Application Programming Interface (API), lidar com dependências, atualizações, falhas de segurança e por aí vai... Com isso em mente, colocando na balança, na maioria dos casos, a utilização de uma biblioteca ainda traz mais vantagens, principalmente quando não dominamos o problema resolvido por ela.
+A escolha e a utilização de uma biblioteca pode parecer uma tarefa simples, mas muitas vezes é bem trabalhosa. Aprender sua Application Programming Interface (API), lidar com dependências, atualizações, falhas de segurança e por aí vai... Com isso em mente, colocando na balança, na maioria dos casos, a utilização de uma biblioteca ainda traz mais vantagens, principalmente quando não dominamos o problema resolvido por ela.
 
 Veja como exemplo as bibliotecas que vamos utilizar neste artigo: não precisamos de fato saber como a manipulação da imagem é realizada. Iremos apenas utilizar uma biblioteca que fará toda a parte mais complicada para nós.
 
@@ -110,10 +110,10 @@ Execução: `node redimensionar.js`
 <?php
 require 'vendor/autoload.php';
 
-$imagine = new Imagine\Imagick\Imagine();
+$imagem = new Imagine\Imagick\Imagine();
 
-$imagem = $imagine->open('imagem.jpg');
-$imagem->resize(new Imagine\Image\Box(120, 120))
+$imagem->open('imagem.jpg')
+       ->resize(new Imagine\Image\Box(120, 120))
        ->save('image120x120.jpg');
 {% endhighlight %}
 
