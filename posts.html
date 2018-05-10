@@ -1,0 +1,21 @@
+---
+layout: minimal
+title: "#Posts"
+---
+
+<h2>Posts</h2>
+
+{% for post in site.posts %}
+
+<article role="article" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+    <div class="content">
+        <a title="Open the post" href="{{ post.url | prepend: site.baseurl }}">
+            <p class="post-title" itemprop="name">
+                <time itemprop="datePublished" datetime="{{ post.date }}">{{ post.date | date_to_string }}</time> - 
+                {{ post.title | replace: ' ','-'}}
+            </p>
+        </a>
+    </div>
+</article>
+
+{% endfor %}
