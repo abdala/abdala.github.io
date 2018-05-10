@@ -2,7 +2,7 @@
 title: Abdala Cerqueira
 description: "Programming and whats around it"
 baseurl: "" # for test: remove string '/space-jekyll-template' to ''
-url: "http://victorvoid.github.io/space-jekyll-template/" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
+url: "https://abda.la" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
 
 # User settings
 username: abdala
