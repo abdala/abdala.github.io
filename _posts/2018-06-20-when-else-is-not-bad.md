@@ -12,7 +12,7 @@ tags:
 
 According with Rule 2 of Object Calisthenics you should not use ELSE condition. So there are some techniques to avoid using it. Like in this examples:
 
-## 1 - Default value declaration
+### 1 - Default value declaration
 
 {% highlight php %}
 <?php
@@ -25,7 +25,7 @@ if (isset($_GET['page'])) {
 
 {% endhighlight %}
 
-## 2 - Early return
+### 2 - Early return
 
 {% highlight php %}
 <?php
@@ -38,7 +38,7 @@ return 'index';
 
 {% endhighlight %}
 
-## 3 - Use of CONTINUE Keyword inside loops
+### 3 - Use CONTINUE inside loops
 
 {% highlight php %}
 <?php
