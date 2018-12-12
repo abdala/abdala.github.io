@@ -9,13 +9,13 @@ tags:
   - programação
 ---
 
-It took me time to find a reasonable docker/docker-compose configuration that is good for all my environments. I was searching for a solution to use the same Dockerfile in different environments and continue with a small/readable image.
+It took me time to find a reasonable docker/docker-compose configuration that is good for all my environments. I was searching for a solution to use the same Dockerfile in different environments and continue with a small image.
 
-After some tests and researches I found myself using Multistage Dockerfile a lot and it fits very well for all my need. Multistage is when you have more than one `FROM` command in the same Dockerfile.
+After some tests and researches, I found myself using Multistage Dockerfile a lot and it fits very well for all my needs. Multistage is when you have more than one `FROM` command in the same Dockerfile.
 
-For better understanding we have to keep in mind 2 things:
+For better understanding, we have to keep in mind two things:
 
-1. The latest FROM instruction will be the final image
+1. The last `FROM` instruction will be the final image
 2. We have to explicit copy files between stages
 
 ## PHP application
