@@ -11,7 +11,7 @@ tags:
 - iniciando
 ---
 
-Para quem ainda não leu o primeiro artigo [Manhê! Aprendi a programar!](http://abda.la/projetos/2015/02/14/manhe-aprendi-a-programar/)
+Para quem ainda não leu o primeiro artigo [Manhê! Aprendi a programar!](http://abda.la/manhe-aprendi-a-programar/)
 
 ## I/O
 

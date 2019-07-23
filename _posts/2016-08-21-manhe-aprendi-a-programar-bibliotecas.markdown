@@ -13,8 +13,8 @@ tags:
 
 Para quem ainda não leu os primeiros artigos:
 
-- [Manhê! Aprendi a programar!](http://abda.la/projetos/2015/02/14/manhe-aprendi-a-programar)
-- [Manhê! Aprendi a programar! I/O](http://abda.la/projetos/2015/08/09/manhe-aprendi-a-programar-io)
+- [Manhê! Aprendi a programar!](http://abda.la/manhe-aprendi-a-programar)
+- [Manhê! Aprendi a programar! I/O](http://abda.la/manhe-aprendi-a-programar-io)
 
 ## Bibliotecas
 
