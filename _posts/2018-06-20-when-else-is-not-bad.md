@@ -10,7 +10,7 @@ tags:
   - iniciando
 ---
 
-According with Rule 2 of Object Calisthenics you should not use ELSE condition. So there are some techniques to avoid using it. Like in this examples:
+According with Rule 2 of Object Calisthenics you should not use ELSE condition. So there are some techniques to avoid using it. Like in these examples:
 
 ### 1 - Default value declaration
 
@@ -55,7 +55,7 @@ foreach ($actions as $action) {
 
 {% endhighlight %}
 
-When a saw this techniques I was a very excited about it and I had a lot fun killing ELSES.
+When a saw these techniques I was a very excited about it and I had a lot fun killing ELSES.
 
 Nowadays I use IF conditions to express the exception behavior of my code and keep all main behavior in the first level of the function/method.
 
@@ -76,6 +76,6 @@ foreach ($actions as $action) {
 
 {% endhighlight %}
 
-It seems better to understand, right? There is not just one main behavior. This two possibilities have the same importance in the code execution. They are valid behaviors. I always try to keep my code small and readable. Some of this small decisions make a difference in my day by day.
+It seems better to understand, right? There is not just one main behavior. These two possibilities have the same importance in the code execution. They are valid behaviors. I always try to keep my code small and readable. Some of this small decisions make a difference in my day by day.
 
 Let's keep it simple! Let's write less code!
