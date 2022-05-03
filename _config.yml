@@ -46,7 +46,7 @@ links:
       new_tab: true
       key_trigger: g
     - title: twitter
-      url: http://www.twitter.com/abdalac
+      url: http://www.twitter.com/abdalacerqueira
       key_trigger: t
     - title: search
       url: ""
@@ -54,12 +54,12 @@ links:
 
 # projects in header index
 projects:
-  - name: Reduce Database
-    url: https://github.com/abdala/reduce-database
-  - name: PagSeguro gateway for OmniPay
-    url: https://github.com/abdala/omnipay-pagseguro
-  - name: Gant (Generic API Client - based on AWS SDK)
-    url: https://github.com/abdala/gant
+  - name: Cache server for AWS Secrets Manager
+    url: https://github.com/cgauge/aws-secretsmanager-caching-extension
+  - name: Task Manager Library
+    url: https://github.com/cgauge/task-manager-lib
+  - name: Password Strength Library
+    url: https://github.com/cgauge/password-strength-lib
 
 # exclude my node related stuff
 exclude: ['package.json', 'src', 'node_modules']
