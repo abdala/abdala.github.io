@@ -1,16 +1,16 @@
 # Site settings
-title: Abdala Cerqueira
-description: "Programming and whats around it"
+title: Ab Cer
+description: "Let's write less code"
 baseurl: "" # for test: remove string '/space-jekyll-template' to ''
-url: "https://abda.la" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
+url: "https://binaryja.cc" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
 
 # User settings
-username: abdala
-user_title: Abdala Cerqueira 
-email: abdala.cerqueira[at]gmail.com
-twitter_username: abdalacerqueira
-github_username:  abdala
-linkedin_public_url: abdala # Example: For public profile 'www.linkedin.com/in/john-smith', 'john-smith' is your linkedin_public_url
+username: ab
+user_title: Ab Cer
+email: site[at]binaryja.cc
+twitter_username: 
+github_username: abdala
+linkedin_public_url: 
 profile_picture: https://pbs.twimg.com/profile_images/985598325541015553/uzkyOsgZ_400x400.jpg 
 
 # Build settings
@@ -45,9 +45,6 @@ links:
       url: http://www.github.com/abdala
       new_tab: true
       key_trigger: g
-    - title: twitter
-      url: http://www.twitter.com/abdalacerqueira
-      key_trigger: t
     - title: search
       url: ""
       key_trigger: s #WARNING: search only works with "s"
