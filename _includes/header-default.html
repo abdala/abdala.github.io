@@ -9,12 +9,6 @@
             <span class="site-title">[{{site.username}}]</span>
         </h1>
 
-        <div class="icons-home">
-            <a aria-label="My Github" title="Show my projects" target="_blank" href="https://github.com/{{site.github_username}}">
-                <svg class="icon icon-github-alt"><use xlink:href="#icon-github-alt"></use></svg>
-            </a>
-        </div>
-
         <ul class="recent">
             <p>Recent posts:</p>
              {% for post in site.posts limit:3%}
