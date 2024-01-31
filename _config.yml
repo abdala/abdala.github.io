@@ -1,12 +1,12 @@
 # Site settings
-title: Ab Cer
+title: Ab
 description: "Let's write less code"
 baseurl: "" # for test: remove string '/space-jekyll-template' to ''
 url: "https://binaryja.cc" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
 
 # User settings
 username: ab
-user_title: Ab Cer
+user_title: Ab
 email: site[at]binaryja.cc
 twitter_username: 
 github_username: abdala
