@@ -1,16 +1,16 @@
 # Site settings
-title: Ab
+title: Abe
 description: "Let's write less code"
 baseurl: "" # for test: remove string '/space-jekyll-template' to ''
 url: "https://binaryja.cc" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
 
 # User settings
-username: ab
-user_title: Ab
+username: abe
+user_title: Abe
 email: site[at]binaryja.cc
 twitter_username: 
 github_username: abdala
-linkedin_public_url: 
+linkedin_public_url: https://www.linkedin.com/in/abdala
 profile_picture: https://pbs.twimg.com/profile_images/985598325541015553/uzkyOsgZ_400x400.jpg 
 
 # Build settings
@@ -45,12 +45,18 @@ links:
       url: http://www.github.com/abdala
       new_tab: true
       key_trigger: g
+    - title: linkedin
+      url: https://www.linkedin.com/in/abdala
+      new_tab: true
+      key_trigger: l
     - title: search
       url: ""
       key_trigger: s #WARNING: search only works with "s"
 
 # projects in header index
 projects:
+  - name: DTC - Declarative Test Cases
+    url: https://github.com/cgauge/packages
   - name: Cache server for AWS Secrets Manager
     url: https://github.com/cgauge/aws-secretsmanager-caching-extension
   - name: Task Manager Library
