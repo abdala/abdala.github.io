@@ -16,7 +16,7 @@ Olá! Nesse post o nosso objetivo principal vai ser: conseguir chamar um control
 
 A primeira coisa que vamos fazer é definir a estrutura de diretório da nossa apliação. Vamos construir uma estrutura que seja compatível com o padrão MVC. Ela ficará assim:
 
-[![](http://abda.la/wp-content/uploads/2012/01/Screen-Shot-2012-01-02-at-4.59.51-PM.png)](http://abda.la/wp-content/uploads/2012/01/Screen-Shot-2012-01-02-at-4.59.51-PM.png)
+[![](http://binaryja.cc/wp-content/uploads/2012/01/Screen-Shot-2012-01-02-at-4.59.51-PM.png)](http://binaryja.cc/wp-content/uploads/2012/01/Screen-Shot-2012-01-02-at-4.59.51-PM.png)
 
 **Aplicacao**: arquivos da nossa aplicação. O que de fato vamos desenvolver.
 

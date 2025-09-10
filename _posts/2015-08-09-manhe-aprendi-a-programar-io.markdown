@@ -11,7 +11,7 @@ tags:
 - iniciando
 ---
 
-Para quem ainda não leu o primeiro artigo [Manhê! Aprendi a programar!](http://abda.la/manhe-aprendi-a-programar/)
+Para quem ainda não leu o primeiro artigo [Manhê! Aprendi a programar!](http://binaryja.cc/manhe-aprendi-a-programar/)
 
 ## I/O
 

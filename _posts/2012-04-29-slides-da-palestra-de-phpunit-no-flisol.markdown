@@ -15,7 +15,7 @@ tags:
 - phpunit
 ---
 
-![](http://abda.la/wp-content/uploads/2012/04/flisol_moin_banner.png)
+![](http://binaryja.cc/wp-content/uploads/2012/04/flisol_moin_banner.png)
 
 Sábado(28/04) foi realizado o FLISOL. O PHP-PB estava presente e fui junto para palestrar - PHPUnit: ele irá te salvar.
 

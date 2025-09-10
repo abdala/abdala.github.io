@@ -13,9 +13,9 @@ tags:
 
 Para quem ainda não leu os primeiros artigos:
 
-- [Manhê! Aprendi a programar!](http://abda.la/projetos/2015/02/14/manhe-aprendi-a-programar)
-- [Manhê! Aprendi a programar! I/O](http://abda.la/projetos/2016/08/09/manhe-aprendi-a-programar-io)
-- [Manhê! Aprendi a programar! Bibliotecas](http://abda.la/projetos/2016/08/21/manhe-aprendi-a-programar-bibliotecas)
+- [Manhê! Aprendi a programar!](http://binaryja.cc/projetos/2015/02/14/manhe-aprendi-a-programar)
+- [Manhê! Aprendi a programar! I/O](http://binaryja.cc/projetos/2016/08/09/manhe-aprendi-a-programar-io)
+- [Manhê! Aprendi a programar! Bibliotecas](http://binaryja.cc/projetos/2016/08/21/manhe-aprendi-a-programar-bibliotecas)
 
 ## Web
 
