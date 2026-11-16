@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f2937">
+<title>Dutch Irregular Verbs – Flashcards</title>
+<style>
+  :root {
+    --bg: #f3f4f6; --card: #ffffff; --text: #111827; --muted: #6b7280;
+    --accent: #f97316; --good: #16a34a; --bad: #dc2626; --border: #e5e7eb;
+    --shadow: 0 10px 30px rgba(0,0,0,.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #111827; --card: #1f2937; --text: #f9fafb; --muted: #9ca3af; --border: #374151; --shadow: 0 10px 30px rgba(0,0,0,.5); }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { min-height: 100%; margin: 0; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg); color: var(--text);
+    display: flex; flex-direction: column; align-items: center; min-height: 100vh; min-height: 100dvh;
+    padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom);
+  }
+  header, main, footer, .top { width: 100%; max-width: 560px; }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 12px 0 6px; gap: 8px; }
+  h1 { font-size: 1.05rem; margin: 0; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  .icon-btn { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; }
+
+  .stats { font-size: .85rem; color: var(--muted); display: flex; justify-content: space-between; margin: 4px 2px 6px; }
+  .bar { height: 8px; background: var(--border); border-radius: 99px; overflow: hidden; display: flex; }
+  .bar span { display: block; height: 100%; background: var(--good); transition: width .3s; }
+  .bar span.learning { background: var(--accent); }
+
+  main { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 12px 0; }
+  .scene { perspective: 1200px; width: 100%; height: min(62vh, 460px); min-height: 300px; }
+  .card { position: relative; width: 100%; height: 100%; transition: transform .45s; transform-style: preserve-3d; cursor: pointer; }
+  .card.flipped { transform: rotateY(180deg); }
+  .card.noanim { transition: none; }
+  .face {
+    position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    background: var(--card); border-radius: 22px; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 36px 20px 28px; text-align: center; overflow: auto;
+  }
+  .face.back { transform: rotateY(180deg); }
+  .tag { position: absolute; top: 14px; left: 16px; font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .star { position: absolute; top: 12px; right: 16px; color: var(--accent); font-size: 1.1rem; }
+  .big { font-size: clamp(1.8rem, 8vw, 2.8rem); font-weight: 700; word-break: break-word; }
+  .sub { color: var(--muted); margin-top: 10px; font-size: 1.05rem; }
+  .hint { position: absolute; bottom: 10px; font-size: .75rem; color: var(--muted); }
+  .forms { display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; text-align: left; font-size: clamp(1rem, 4.5vw, 1.3rem); margin: 0; }
+  .forms dt { color: var(--muted); font-size: .8rem; align-self: center; text-transform: uppercase; letter-spacing: .05em; }
+  .forms dd { margin: 0; font-weight: 600; }
+  .forms .eng { font-weight: 400; color: var(--accent); }
+  .ex { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); width: 100%; }
+  .ex .nl { font-size: clamp(1rem, 4.5vw, 1.2rem); font-style: italic; }
+  .ex .en { font-size: .9rem; color: var(--muted); margin-top: 4px; }
+  .ex mark { background: none; color: var(--accent); font-weight: 700; }
+  .front-ex { margin-top: 18px; }
+
+  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .actions button { border: 0; border-radius: 14px; padding: 16px; font-size: 1.05rem; font-weight: 600; color: #fff; }
+  .actions .no { background: var(--bad); }
+  .actions .yes { background: var(--good); }
+  .actions button:disabled { opacity: .35; cursor: default; }
+  .empty { text-align: center; padding: 30px 10px; }
+
+  footer { padding: 6px 0 12px; font-size: .75rem; color: var(--muted); text-align: center; }
+
+  dialog { border: 0; border-radius: 18px; padding: 20px; background: var(--card); color: var(--text); width: min(92vw, 420px); box-shadow: var(--shadow); }
+  dialog::backdrop { background: rgba(0,0,0,.5); }
+  dialog h2 { margin: 0 0 12px; font-size: 1.1rem; }
+  label.row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  select { font: inherit; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+  input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--accent); }
+  .dlg-actions { display: flex; gap: 10px; margin-top: 16px; justify-content: space-between; }
+  .dlg-actions button { padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); }
+  .dlg-actions .danger { color: var(--bad); }
+  .dlg-actions .primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🇳🇱 Onregelmatige werkwoorden</h1>
+  <button class="icon-btn" id="openSettings" aria-label="Settings">⚙︎ Settings</button>
+</header>
+
+<div class="top">
+  <div class="stats"><span id="statLeft"></span><span id="statRight"></span></div>
+  <div class="bar" aria-hidden="true"><span id="barMastered"></span><span class="learning" id="barLearning"></span></div>
+</div>
+
+<main>
+  <div id="study">
+    <div class="scene">
+      <div class="card" id="card" tabindex="0" role="button" aria-label="Flip card">
+        <div class="face front" id="front"></div>
+        <div class="face back" id="back"></div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="no" id="btnNo" disabled>✗ Again</button>
+      <button class="yes" id="btnYes" disabled>✓ Got it</button>
+    </div>
+  </div>
+  <div class="empty" id="empty" hidden>
+    <h2>🎉 All done!</h2>
+    <p>Nothing left to study with the current filters.</p>
+  </div>
+</main>
+
+<footer>Tap card or press Space to flip · ← again · → got it</footer>
+
+<dialog id="settings">
+  <h2>Settings</h2>
+  <label class="row">Mode
+    <select id="optMode">
+      <option value="nl-en">Dutch → English</option>
+      <option value="en-nl">English → Dutch</option>
+      <option value="forms">Infinitive → past forms</option>
+    </select>
+  </label>
+  <label class="row">Show example sentence <input type="checkbox" id="optSentence"></label>
+  <label class="row">Only frequent verbs <input type="checkbox" id="optFreq"></label>
+  <label class="row">Shuffle new cards <input type="checkbox" id="optShuffle"></label>
+  <label class="row">Hide mastered cards <input type="checkbox" id="optHideMastered"></label>
+  <div class="dlg-actions">
+    <button class="danger" id="btnReset">Reset progress</button>
+    <button class="primary" id="btnClose">Done</button>
+  </div>
+</dialog>
+
+<script>
+/* ---------- Data: infinitive | imperfect | perfect | English | frequent(1) | Dutch sentence | English sentence ----------
+   Sentences are written for study purposes; the verb form used in the sentence is wrapped in [brackets] to be highlighted. */
+const RAW = `
+bakken|bakte, bakten|gebakken|bake, fry||Mijn oma [bakte] elke zaterdag een appeltaart.|My grandmother baked an apple pie every Saturday.
+bederven|bedierf, bedierven|(is) bedorven|spoil||De melk is in de zon [bedorven].|The milk spoiled in the sun.
+beginnen|begon, begonnen|is begonnen|begin, start|1|De les [begint] om negen uur.|The lesson starts at nine o'clock.
+begrijpen|begreep, begrepen|begrepen|understand|1|Ik [begrijp] de vraag niet.|I don't understand the question.
+bewegen|bewoog, bewogen|bewogen|move||De kat [bewoog] niet.|The cat did not move.
+bidden|bad, baden|gebeden|pray||Ze [bad] elke avond voor het slapen.|She prayed every evening before sleeping.
+bieden|bood, boden|geboden|offer||Hij [bood] mij een kop koffie aan.|He offered me a cup of coffee.
+bijten|beet, beten|gebeten|bite||De hond [beet] de postbode.|The dog bit the postman.
+binden|bond, bonden|gebonden|tie||Hij [bond] zijn veters vast.|He tied his shoelaces.
+blazen|blies, bliezen|geblazen|blow||Ze [blies] de kaarsjes uit.|She blew out the candles.
+blijken|bleek, bleken|is gebleken|appear||Het [bleek] een goed idee te zijn.|It turned out to be a good idea.
+blijven|bleef, bleven|is gebleven|stay, remain|1|Ik [blijf] vanavond thuis.|I am staying home tonight.
+braden|braadde, braadden|gebraden|roast||Hij [braadt] het vlees in de pan.|He fries the meat in the pan.
+breken|brak, braken|gebroken|break||Ik [brak] mijn been tijdens het skiën.|I broke my leg while skiing.
+brengen|bracht, brachten|gebracht|bring|1|Kun je me morgen mijn boek [brengen]?|Can you bring me my book tomorrow?
+buigen|boog, bogen|gebogen|bend||Hij [boog] zich om het kind te helpen.|He bent down to help the child.
+denken|dacht, dachten|gedacht|think|1|Ik [denk] dat het gaat regenen.|I think it's going to rain.
+doen|deed, deden|gedaan|do|1|Wat [doe] je morgen?|What are you doing tomorrow?
+dragen|droeg, droegen|gedragen|carry, wear|1|Ze [draagt] een rode jas.|She is wearing a red coat.
+drijven|dreef, dreven|gedreven|float||Het hout [dreef] op het water.|The wood floated on the water.
+drinken|dronk, dronken|gedronken|drink|1|Ik [drink] graag thee.|I like drinking tea.
+druipen|droop, dropen|(is) gedropen|drip||Het water [droop] van het dak.|The water dripped from the roof.
+eten|at, aten|gegeten|eat|1|We [aten] gisteren pannenkoeken.|We ate pancakes yesterday.
+fluiten|floot, floten|gefloten|whistle||De scheidsrechter [floot] voor de pauze.|The referee whistled for half-time.
+gaan|ging, gingen|is gegaan|go|1|Wij [gaan] morgen naar Amsterdam.|We are going to Amsterdam tomorrow.
+gelden|gold, golden|gegolden|apply, be valid||Deze regel [geldt] voor iedereen.|This rule applies to everyone.
+geven|gaf, gaven|gegeven|give|1|Ze [gaf] hem een cadeau.|She gave him a present.
+gieten|goot, goten|gegoten|pour||Hij [goot] melk in het glas.|He poured milk into the glass.
+glijden|gleed, gleden|is gegleden|slip, slide||De auto [gleed] over het ijs.|The car slid over the ice.
+graven|groef, groeven|gegraven|dig||De kinderen [groeven] een gat in het zand.|The children dug a hole in the sand.
+grijpen|greep, grepen|gegrepen|grab||Ze [greep] zijn hand.|She grabbed his hand.
+hangen|hing, hingen|gehangen|hang||De jas [hangt] aan de deur.|The coat hangs on the door.
+hebben|had, hadden|gehad|have|1|Ik [heb] een broer en een zus.|I have a brother and a sister.
+helpen|hielp, hielpen|geholpen|help|1|Kun je me even [helpen]?|Can you help me for a moment?
+heten|heette, heetten|geheten|be called||Hoe [heet] jij?|What is your name?
+houden|hield, hielden|gehouden|hold|1|Ik [hou] van fietsen.|I love cycling.
+jagen|jaagde / joeg, jaagden / joegen|gejaagd|hunt||De vos [jaagt] op konijnen.|The fox hunts rabbits.
+kiezen|koos, kozen|gekozen|choose|1|Ze [koos] de blauwe jurk.|She chose the blue dress.
+kijken|keek, keken|gekeken|look|1|We [keken] gisteren een film.|We watched a film yesterday.
+klimmen|klom, klommen|(is) geklommen|climb||Ze [klommen] naar de top van de berg.|They climbed to the top of the mountain.
+klinken|klonk, klonken|geklonken|sound||Dat [klinkt] goed!|That sounds good!
+komen|kwam, kwamen|is gekomen|come|1|Hij [komt] om vijf uur thuis.|He comes home at five o'clock.
+kopen|kocht, kochten|gekocht|buy|1|Ik [kocht] brood bij de bakker.|I bought bread at the baker's.
+krijgen|kreeg, kregen|gekregen|get, receive|1|Ze [kreeg] een brief van de gemeente.|She received a letter from the council.
+krimpen|kromp, krompen|is gekrompen|shrink||Mijn trui is in de was [gekrompen].|My sweater shrank in the wash.
+kruipen|kroop, kropen|(is) gekropen|crawl||De baby [kroop] over de vloer.|The baby crawled across the floor.
+kunnen|kon, konden|gekund|be able|1|Ik [kan] goed zwemmen.|I can swim well.
+lachen|lachte, lachten|gelachen|laugh|1|Wij [lachten] de hele avond.|We laughed all evening.
+laten|liet, lieten|gelaten|let|1|Hij [liet] de hond uit.|He let the dog out.
+lezen|las, lazen|gelezen|read|1|Ik [las] gisteren een goed boek.|I read a good book yesterday.
+liegen|loog, logen|gelogen|lie (untruth)||Je [liegt] tegen me!|You are lying to me!
+liggen|lag, lagen|gelegen|lie|1|De sleutels [liggen] op tafel.|The keys are on the table.
+lijden|leed, leden|geleden|suffer||Hij [leed] veel pijn.|He suffered a lot of pain.
+lijken|leek, leken|geleken|appear, seem|1|Dat [lijkt] me een goed plan.|That seems like a good plan to me.
+lopen|liep, liepen|(is) gelopen|walk|1|Ik [loop] elke dag naar mijn werk.|I walk to work every day.
+moeten|moest, moesten|gemoeten|must, should|1|Ik [moet] morgen vroeg opstaan.|I have to get up early tomorrow.
+mogen|mocht, mochten|gemogen|be allowed to|1|Hier [mag] je niet roken.|You are not allowed to smoke here.
+nemen|nam, namen|genomen|take|1|Ik [neem] de trein naar Utrecht.|I take the train to Utrecht.
+plegen|placht, plachten|---|be in the habit of||Hij [placht] elke ochtend te wandelen.|He used to take a walk every morning.
+rijden|reed, reden|(is) gereden|ride, drive|1|Zij [reed] met de auto naar Rotterdam.|She drove to Rotterdam by car.
+rijzen|rees, rezen|is gerezen|rise||De zon [rijst] boven de duinen.|The sun rises above the dunes.
+roepen|riep, riepen|geroepen|call|1|Mijn moeder [riep] me voor het eten.|My mother called me for dinner.
+ruiken|rook, roken|geroken|smell||Het [ruikt] hier naar koffie.|It smells of coffee here.
+scheiden|scheidde, scheidden|gescheiden|separate||Een hek [scheidt] de twee tuinen.|A fence separates the two gardens.
+schenken|schonk, schonken|geschonken|pour, give||Hij [schonk] de wijn in de glazen.|He poured the wine into the glasses.
+scheppen|schiep, schiepen|geschapen|create||De kunstenaar [schiep] een prachtig werk.|The artist created a beautiful work.
+scheren|schoor, schoren|geschoren|shave||Hij [scheert] zich elke ochtend.|He shaves every morning.
+schieten|schoot, schoten|geschoten|shoot||De speler [schoot] de bal in het doel.|The player shot the ball into the goal.
+schijnen|scheen, schenen|geschenen|shine, seem|1|De zon [schijnt] vandaag.|The sun is shining today.
+schrijven|schreef, schreven|geschreven|write|1|Ik [schrijf] een e-mail aan mijn baas.|I am writing an email to my boss.
+schrikken|schrok, schrokken|is geschrokken|be shocked||Ik [schrok] van het harde geluid.|I was startled by the loud noise.
+schuiven|schoof, schoven|geschoven|push, shove||Hij [schoof] de tafel naar de muur.|He pushed the table to the wall.
+slaan|sloeg, sloegen|geslagen|hit||Hij [sloeg] de bal met zijn hand.|He hit the ball with his hand.
+slapen|sliep, sliepen|geslapen|sleep|1|De baby [slaapt] al.|The baby is already asleep.
+sluiten|sloot, sloten|gesloten|close|1|De winkel [sluit] om zes uur.|The shop closes at six o'clock.
+snijden|sneed, sneden|gesneden|cut|1|Ik [sneed] het brood met een mes.|I cut the bread with a knife.
+spreken|sprak, spraken|gesproken|speak|1|Zij [spreekt] drie talen.|She speaks three languages.
+springen|sprong, sprongen|(is) gesprongen|jump||De kinderen [sprongen] in het zwembad.|The children jumped into the pool.
+staan|stond, stonden|gestaan|stand|1|De fiets [staat] in de schuur.|The bike is in the shed.
+steken|stak, staken|gestoken|stab, sting||Een wesp [stak] me in mijn arm.|A wasp stung me on the arm.
+stelen|stal, stalen|gestolen|steal|1|Iemand [stal] mijn fiets.|Someone stole my bike.
+sterven|stierf, stierven|is gestorven|die||Zijn opa [stierf] vorig jaar.|His grandfather died last year.
+stijgen|steeg, stegen|(is) gestegen|climb||De prijzen [stijgen] elk jaar.|Prices rise every year.
+treden|trad, traden|is getreden|step||De regels [treden] morgen in werking.|The rules come into effect tomorrow.
+treffen|trof, troffen|getroffen|hit||Ik [trof] hem bij het station.|I ran into him at the station.
+trekken|trok, trokken|getrokken|pull||Hij [trok] de deur open.|He pulled the door open.
+vallen|viel, vielen|is gevallen|fall|1|Het kind [viel] van de trap.|The child fell down the stairs.
+vangen|ving, vingen|gevangen|catch||De kat [ving] een muis.|The cat caught a mouse.
+varen|voer, voeren|(is) gevaren|sail||De boot [vaart] naar Texel.|The boat sails to Texel.
+vechten|vocht, vochten|gevochten|fight||De jongens [vochten] op het schoolplein.|The boys fought in the schoolyard.
+verbieden|verbood, verboden|verboden|forbid||Mijn ouders [verboden] mij te gamen.|My parents forbade me from gaming.
+verdwijnen|verdween, verdwenen|is verdwenen|disappear||Mijn sleutels zijn [verdwenen].|My keys have disappeared.
+vergeten|vergat, vergaten|(is) vergeten|forget|1|Ik [vergat] mijn paraplu.|I forgot my umbrella.
+verliezen|verloor, verloren|verloren|lose|1|We [verloren] de wedstrijd.|We lost the match.
+vermijden|vermeed, vermeden|vermeden|avoid||Hij [vermeed] het drukke centrum.|He avoided the busy centre.
+vertrekken|vertrok, vertrokken|is vertrokken|leave|1|De trein [vertrekt] om tien uur.|The train leaves at ten o'clock.
+vinden|vond, vonden|gevonden|find|1|Ik [vond] mijn portemonnee onder de bank.|I found my wallet under the sofa.
+vliegen|vloog, vlogen|gevlogen|fly||De vogel [vloog] over de rivier.|The bird flew over the river.
+vouwen|vouwde, vouwden|gevouwen|fold||Zij [vouwde] de brief dubbel.|She folded the letter in two.
+vragen|vroeg, vroegen|gevraagd|ask|1|Mag ik je iets [vragen]?|May I ask you something?
+vriezen|vroor, vroren|gevroren|freeze||Het [vroor] vannacht.|It froze last night.
+waaien|waaide / woei, waaiden / woeien|gewaaid|blow||Het [waait] hard vandaag.|It is very windy today.
+wassen|waste, wasten|gewassen|wash|1|Ik [was] mijn handen voor het eten.|I wash my hands before dinner.
+wegen|woog, wogen|gewogen|weigh||De koffer [woog] twintig kilo.|The suitcase weighed twenty kilos.
+werpen|wierp, wierpen|geworpen|throw||Hij [wierp] de bal naar zijn broer.|He threw the ball to his brother.
+weten|wist, wisten|geweten|know|1|Ik [weet] het antwoord niet.|I don't know the answer.
+wijzen|wees, wezen|gewezen|show, point||Ze [wees] naar de overkant.|She pointed to the other side.
+willen|wilde / wou, wilden|gewild|want|1|Ik [wil] graag een biertje.|I would like a beer.
+winnen|won, wonnen|gewonnen|win||Ons team [won] de finale.|Our team won the final.
+worden|werd, werden|is geworden|become|1|Hij [wordt] later piloot.|He is going to be a pilot.
+wrijven|wreef, wreven|gewreven|rub||Ze [wreef] in haar ogen.|She rubbed her eyes.
+zeggen|zei, zeiden|gezegd|say|1|Wat [zei] hij?|What did he say?
+zenden|zond, zonden|gezonden|send||De zender [zendt] elke dag nieuws uit.|The station broadcasts news every day.
+zien|zag, zagen|gezien|see|1|Ik [zag] hem gisteren in de stad.|I saw him in town yesterday.
+zijn|was, waren|is geweest|be|1|Wij [zijn] gisteren naar het strand geweest.|We went to the beach yesterday.
+zingen|zong, zongen|gezongen|sing||Ze [zong] een mooi lied.|She sang a beautiful song.
+zinken|zonk, zonken|is gezonken|sink||Het schip [zonk] in de storm.|The ship sank in the storm.
+zitten|zat, zaten|gezeten|sit|1|Hij [zit] op de bank.|He is sitting on the sofa.
+zoeken|zocht, zochten|gezocht|search, look|1|Ik [zoek] mijn bril.|I am looking for my glasses.
+zullen|zou, zouden|---|will, would|1|Ik [zal] je morgen bellen.|I will call you tomorrow.
+zwemmen|zwom, zwommen|(is) gezwommen|swim||Wij [zwommen] in de zee.|We swam in the sea.
+zweren|zwoer, zwoeren|gezworen|swear||Hij [zwoer] dat het waar was.|He swore that it was true.
+zwijgen|zweeg, zwegen|gezwegen|be silent||Ze [zweeg] de hele dag.|She was silent all day.
+`;
+
+const CARDS = RAW.trim().split("\n").map((l, i) => {
+  const [inf, imp, perf, eng, f, nl, en] = l.split("|");
+  return { id: inf, i, inf, imp, perf, eng, freq: f === "1", nl, en };
+});
+
+/* ---------- State (localStorage) ---------- */
+const KEY = "dutch-verbs-flashcards-v1";
+const INTERVALS = [0, 3, 8, 20, 50];   // cards until next review, by box
+const MASTERED = INTERVALS.length;     // box >= this means mastered
+const defaults = { settings: { mode: "nl-en", sentence: true, freq: false, shuffle: true, hideMastered: false },
+                   progress: {}, counter: 0 };
+let state;
+try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch { state = {}; }
+state = { ...defaults, ...state, settings: { ...defaults.settings, ...(state.settings || {}) },
+          progress: state.progress || {} };
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {} };
+const prog = id => state.progress[id] || (state.progress[id] = { box: 0, due: 0, seen: 0, rnd: Math.random() });
+
+/* ---------- Queue ---------- */
+let current = null, lastId = null;
+
+function pool() {
+  const s = state.settings;
+  return CARDS.filter(c => (!s.freq || c.freq) && !(s.hideMastered && prog(c.id).box >= MASTERED));
+}
+
+function pickNext() {
+  const p = pool();
+  if (!p.length) return null;
+  const n = state.counter;
+  const cands = p.filter(c => c.id !== lastId || p.length === 1);
+  const due = cands.filter(c => prog(c.id).due <= n);
+  const list = due.length ? due : cands;
+  const order = c => state.settings.shuffle ? prog(c.id).rnd : c.i;
+  const key = c => {
+    const pr = prog(c.id);
+    // due cards: lowest box first, unseen before seen; otherwise soonest due
+    return due.length ? [pr.box, pr.seen > 0 ? 1 : 0, order(c)] : [pr.due, 0, order(c)];
+  };
+  list.sort((a, b) => {
+    const ka = key(a), kb = key(b);
+    for (let i = 0; i < 3; i++) if (ka[i] !== kb[i]) return ka[i] - kb[i];
+    return 0;
+  });
+  return list[0];
+}
+
+function answer(known) {
+  if (!current || !flipped) return;
+  const pr = prog(current.id);
+  state.counter++;
+  pr.seen++;
+  pr.box = known ? Math.min(pr.box + 1, MASTERED) : 0;
+  pr.due = state.counter + (known ? INTERVALS[Math.min(pr.box, MASTERED - 1)] : 2);
+  pr.rnd = Math.random();
+  lastId = current.id;
+  save();
+  next();
+}
+
+/* ---------- Rendering ---------- */
+const $ = id => document.getElementById(id);
+const cardEl = $("card");
+let flipped = false;
+
+const esc = s => s.replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+
+function formsHTML(c, withEng) {
+  return `<dl class="forms">
+    <dt>Imperfect</dt><dd>${esc(c.imp)}</dd>
+    <dt>Perfect</dt><dd>${esc(c.perf)}</dd>
+    ${withEng ? `<dt>English</dt><dd class="eng">${esc(c.eng)}</dd>` : ""}
+  </dl>`;
+}
+
+function sentenceHTML(c) {
+  if (!state.settings.sentence || !c.nl) return "";
+  const nl = esc(c.nl).replace(/\[(.+?)\]/g, "<mark>$1</mark>");
+  return `<div class="ex"><div class="nl">${nl}</div><div class="en">${esc(c.en)}</div></div>`;
+}
+
+function render() {
+  const c = current, mode = state.settings.mode;
+  $("study").hidden = !c;
+  $("empty").hidden = !!c;
+  if (c) {
+    const star = c.freq ? `<span class="star" title="Frequent verb">★</span>` : "";
+    const ex = sentenceHTML(c);
+    let front, back;
+    if (mode === "nl-en") {
+      front = `<span class="tag">Dutch</span>${star}<div class="big">${esc(c.inf)}</div>`;
+      back = `<span class="tag">Answer</span>${star}<div class="big" style="margin-bottom:16px;color:var(--accent)">${esc(c.eng)}</div>${formsHTML(c, false)}${ex}`;
+    } else if (mode === "en-nl") {
+      front = `<span class="tag">English</span>${star}<div class="big">${esc(c.eng)}</div>`;
+      back = `<span class="tag">Answer</span>${star}<div class="big" style="margin-bottom:16px">${esc(c.inf)}</div>${formsHTML(c, false)}${ex}`;
+    } else {
+      front = `<span class="tag">Past forms?</span>${star}<div class="big">${esc(c.inf)}</div><div class="sub">${esc(c.eng)}</div>`;
+      back = `<span class="tag">Answer</span>${star}<div class="big" style="margin-bottom:16px">${esc(c.inf)}</div>${formsHTML(c, true)}${ex}`;
+    }
+    $("front").innerHTML = front + `<span class="hint">tap to flip</span>`;
+    $("back").innerHTML = back;
+  }
+  $("btnYes").disabled = $("btnNo").disabled = !c || !flipped;
+  cardEl.classList.toggle("flipped", flipped);
+  updateStats();
+}
+
+function updateStats() {
+  const p = pool(), total = p.length || 1;
+  const mastered = p.filter(c => prog(c.id).box >= MASTERED).length;
+  const learning = p.filter(c => { const b = prog(c.id).box; return b > 0 && b < MASTERED; }).length;
+  const seen = p.filter(c => prog(c.id).seen > 0).length;
+  $("statLeft").textContent = `${mastered} mastered · ${learning} learning`;
+  $("statRight").textContent = `${seen}/${p.length} seen · ${state.counter} reviews`;
+  $("barMastered").style.width = (mastered / total * 100) + "%";
+  $("barLearning").style.width = (learning / total * 100) + "%";
+}
+
+function next() {
+  // Switch to the next card without a flip-back animation that would reveal the answer
+  flipped = false;
+  cardEl.classList.add("noanim");
+  current = pickNext();
+  render();
+  void cardEl.offsetWidth;
+  cardEl.classList.remove("noanim");
+}
+
+function flip() {
+  if (!current) return;
+  flipped = !flipped;
+  render();
+}
+
+/* ---------- Events ---------- */
+cardEl.addEventListener("click", flip);
+$("btnYes").addEventListener("click", () => answer(true));
+$("btnNo").addEventListener("click", () => answer(false));
+
+document.addEventListener("keydown", e => {
+  if ($("settings").open) return;
+  if (e.key === " " || e.key === "Enter") { e.preventDefault(); flip(); }
+  else if (e.key === "ArrowRight") answer(true);
+  else if (e.key === "ArrowLeft") answer(false);
+});
+
+// Swipe left/right on a flipped card
+let sx = null, swiped = false;
+cardEl.addEventListener("touchstart", e => { sx = e.touches[0].clientX; }, { passive: true });
+cardEl.addEventListener("touchend", e => {
+  if (sx === null) return;
+  const dx = e.changedTouches[0].clientX - sx; sx = null;
+  if (Math.abs(dx) > 80) { swiped = true; answer(dx > 0); }
+});
+cardEl.addEventListener("click", e => { if (swiped) { swiped = false; e.stopImmediatePropagation(); } }, true);
+
+/* Settings */
+const dlg = $("settings");
+const opts = { mode: "optMode", sentence: "optSentence", freq: "optFreq", shuffle: "optShuffle", hideMastered: "optHideMastered" };
+function loadSettingsUI() {
+  for (const [k, id] of Object.entries(opts)) {
+    const el = $(id); typeof state.settings[k] === "boolean" ? (el.checked = state.settings[k]) : (el.value = state.settings[k]);
+  }
+}
+function applySettings() {
+  for (const [k, id] of Object.entries(opts)) {
+    const el = $(id); state.settings[k] = typeof defaults.settings[k] === "boolean" ? el.checked : el.value;
+  }
+  save();
+  flipped = false; lastId = null;
+  current = pickNext(); render();
+}
+Object.values(opts).forEach(id => $(id).addEventListener("change", applySettings));
+$("openSettings").addEventListener("click", () => { loadSettingsUI(); dlg.showModal(); });
+$("btnClose").addEventListener("click", () => dlg.close());
+$("btnReset").addEventListener("click", () => {
+  if (confirm("Reset all progress?")) {
+    state.progress = {}; state.counter = 0; save();
+    lastId = null; flipped = false; current = pickNext(); render();
+  }
+});
+
+/* ---------- Init ---------- */
+loadSettingsUI();
+current = pickNext();
+render();
+</script>
+</body>
+</html>
