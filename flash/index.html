@@ -58,7 +58,10 @@
   .ex .nl { font-size: clamp(1rem, 4.5vw, 1.2rem); font-style: italic; }
   .ex .en { font-size: .9rem; color: var(--muted); margin-top: 4px; }
   .ex mark { background: none; color: var(--accent); font-weight: 700; }
-  .front-ex { margin-top: 18px; }
+  .say { background: var(--bg); border: 1px solid var(--border); border-radius: 99px; padding: 6px 14px; font-size: .9rem; margin-top: 14px; }
+  .say:active { background: var(--border); }
+  .say-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .no-tts .say { display: none; }
 
   .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
   .actions button { border: 0; border-radius: 14px; padding: 16px; font-size: 1.05rem; font-weight: 600; color: #fff; }
@@ -343,6 +346,39 @@ function sentenceHTML(c) {
   return `<div class="ex"><div class="nl">${nl}</div><div class="en">${esc(c.en)}</div></div>`;
 }
 
+/* ---------- Text-to-speech (browser Web Speech API) ---------- */
+const TTS = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+if (!TTS) document.body.classList.add("no-tts");
+
+function dutchVoice() {
+  const v = speechSynthesis.getVoices().filter(v => /^nl(-|_|$)/i.test(v.lang));
+  return v.find(x => /nl[-_]NL/i.test(x.lang) && x.localService) || v.find(x => x.localService) || v[0] || null;
+}
+function speak(text) {
+  if (!TTS || !text) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "nl-NL";
+  const v = dutchVoice();
+  if (v) { u.voice = v; u.lang = v.lang; }
+  u.rate = 0.9;
+  speechSynthesis.speak(u);
+}
+if (TTS) speechSynthesis.getVoices(); // starts loading the voice list
+
+const sayBtn = (what, label) => `<button class="say" type="button" data-say="${what}">${label}</button>`;
+function sayRow(c) {
+  const sent = state.settings.sentence && c.nl;
+  return `<div class="say-row">${sayBtn("inf", "🔊 Word")}${sayBtn("forms", "🔊 Forms")}${sent ? sayBtn("nl", "🔊 Sentence") : ""}</div>`;
+}
+function textFor(what) {
+  const c = current;
+  if (what === "inf") return c.inf;
+  if (what === "forms") return `${c.inf}. ${c.imp.replace(/ \/ /g, ", of ")}. ${c.perf.replace(/[()]|---/g, "")}`;
+  if (what === "nl") return c.nl.replace(/[\[\]]/g, "");
+  return "";
+}
+
 function render() {
   const c = current, mode = state.settings.mode;
   $("study").hidden = !c;
@@ -352,14 +388,14 @@ function render() {
     const ex = sentenceHTML(c);
     let front, back;
     if (mode === "nl-en") {
-      front = `<span class="tag">Dutch</span>${star}<div class="big">${esc(c.inf)}</div>`;
-      back = `<span class="tag">Answer</span>${star}<div class="big" style="margin-bottom:16px;color:var(--accent)">${esc(c.eng)}</div>${formsHTML(c, false)}${ex}`;
+      front = `<span class="tag">Dutch</span>${star}<div class="big">${esc(c.inf)}</div>${sayBtn("inf", "🔊 Listen")}`;
+      back = `<span class="tag">Answer</span>${star}<div class="big" style="margin-bottom:16px;color:var(--accent)">${esc(c.eng)}</div>${formsHTML(c, false)}${sayRow(c)}${ex}`;
     } else if (mode === "en-nl") {
       front = `<span class="tag">English</span>${star}<div class="big">${esc(c.eng)}</div>`;
-      back = `<span class="tag">Answer</span>${star}<div class="big" style="margin-bottom:16px">${esc(c.inf)}</div>${formsHTML(c, false)}${ex}`;
+      back = `<span class="tag">Answer</span>${star}<div class="big" style="margin-bottom:16px">${esc(c.inf)}</div>${formsHTML(c, false)}${sayRow(c)}${ex}`;
     } else {
-      front = `<span class="tag">Past forms?</span>${star}<div class="big">${esc(c.inf)}</div><div class="sub">${esc(c.eng)}</div>`;
-      back = `<span class="tag">Answer</span>${star}<div class="big" style="margin-bottom:16px">${esc(c.inf)}</div>${formsHTML(c, true)}${ex}`;
+      front = `<span class="tag">Past forms?</span>${star}<div class="big">${esc(c.inf)}</div><div class="sub">${esc(c.eng)}</div>${sayBtn("inf", "🔊 Listen")}`;
+      back = `<span class="tag">Answer</span>${star}<div class="big" style="margin-bottom:16px">${esc(c.inf)}</div>${formsHTML(c, true)}${sayRow(c)}${ex}`;
     }
     $("front").innerHTML = front + `<span class="hint">tap to flip</span>`;
     $("back").innerHTML = back;
@@ -397,7 +433,11 @@ function flip() {
 }
 
 /* ---------- Events ---------- */
-cardEl.addEventListener("click", flip);
+cardEl.addEventListener("click", e => {
+  const b = e.target.closest("[data-say]");
+  if (b) { speak(textFor(b.dataset.say)); return; }
+  flip();
+});
 $("btnYes").addEventListener("click", () => answer(true));
 $("btnNo").addEventListener("click", () => answer(false));
 
