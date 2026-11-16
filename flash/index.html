@@ -48,6 +48,7 @@
   .tag { position: absolute; top: 14px; left: 16px; font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
   .star { position: absolute; top: 12px; right: 16px; color: var(--accent); font-size: 1.1rem; }
   .big { font-size: clamp(1.8rem, 8vw, 2.8rem); font-weight: 700; word-break: break-word; }
+  .eng-line { color: var(--accent); margin-top: 6px; }
   .sub { color: var(--muted); margin-top: 10px; font-size: 1.05rem; }
   .hint { position: absolute; bottom: 10px; font-size: .75rem; color: var(--muted); }
   .forms { display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; text-align: left; font-size: clamp(1rem, 4.5vw, 1.3rem); margin: 0; }
@@ -127,6 +128,9 @@
     </select>
   </label>
   <label class="row">Show example sentence <input type="checkbox" id="optSentence"></label>
+  <label class="row">Voice
+    <select id="optVoice" style="max-width:60%"><option value="auto">Auto (best available)</option></select>
+  </label>
   <label class="row">Only frequent verbs <input type="checkbox" id="optFreq"></label>
   <label class="row">Shuffle new cards <input type="checkbox" id="optShuffle"></label>
   <label class="row">Hide mastered cards <input type="checkbox" id="optHideMastered"></label>
@@ -274,7 +278,7 @@ const CARDS = RAW.trim().split("\n").map((l, i) => {
 const KEY = "dutch-verbs-flashcards-v1";
 const INTERVALS = [0, 3, 8, 20, 50];   // cards until next review, by box
 const MASTERED = INTERVALS.length;     // box >= this means mastered
-const defaults = { settings: { mode: "nl-en", sentence: true, freq: false, shuffle: true, hideMastered: false },
+const defaults = { settings: { mode: "nl-en", sentence: true, voice: "auto", freq: false, shuffle: true, hideMastered: false },
                    progress: {}, counter: 0 };
 let state;
 try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch { state = {}; }
@@ -332,11 +336,11 @@ let flipped = false;
 
 const esc = s => s.replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
 
-function formsHTML(c, withEng) {
+function formsHTML(c) {
   return `<dl class="forms">
+    <dt>Infinitive</dt><dd>${esc(c.inf)}</dd>
     <dt>Imperfect</dt><dd>${esc(c.imp)}</dd>
     <dt>Perfect</dt><dd>${esc(c.perf)}</dd>
-    ${withEng ? `<dt>English</dt><dd class="eng">${esc(c.eng)}</dd>` : ""}
   </dl>`;
 }
 
@@ -350,9 +354,43 @@ function sentenceHTML(c) {
 const TTS = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
 if (!TTS) document.body.classList.add("no-tts");
 
+/* Ranking based on the Readium "recommended voices" list for Dutch
+   (github.com/readium/speech, json/nl.json): neural/natural voices first,
+   then Google, then Apple, then basic system voices. nl-NL is preferred over nl-BE. */
+function voiceScore(v) {
+  const n = v.name, l = v.lang.replace("_", "-");
+  if (!/^nl(-|$)/i.test(l)) return -1;
+  let sc = 0;
+  if (/Colette.*Natural/i.test(n)) sc = 100;
+  else if (/Fenna.*Natural/i.test(n)) sc = 98;
+  else if (/Maarten.*Natural/i.test(n)) sc = 96;
+  else if (/Hanna.*Online/i.test(n)) sc = 90;
+  else if (/Online \(Natural\)/i.test(n)) sc = 85;              // e.g. Belgian neural voices
+  else if (/Google Nederlands \d|nl-nl-x-/i.test(n)) sc = 80;   // Android / ChromeOS "Natural"
+  else if (/Premium/i.test(n)) sc = 75;                         // Apple premium
+  else if (/Enhanced|Verbeterd/i.test(n)) sc = 70;              // Apple enhanced
+  else if (/Google/i.test(n)) sc = 60;                          // Chrome desktop "Google Nederlands"
+  else if (/Xander|Claire/i.test(n)) sc = 50;                   // Apple standard
+  else if (/Frank/i.test(n)) sc = 40;                           // Windows basic
+  else sc = 20;
+  if (/^nl-NL$/i.test(l)) sc += 5;
+  if (v.localService) sc += 1;                                  // tie-break: works offline
+  return sc;
+}
+function dutchVoices() {
+  return speechSynthesis.getVoices().map(v => [v, voiceScore(v)]).filter(x => x[1] >= 0)
+    .sort((a, b) => b[1] - a[1]).map(x => x[0]);
+}
 function dutchVoice() {
-  const v = speechSynthesis.getVoices().filter(v => /^nl(-|_|$)/i.test(v.lang));
-  return v.find(x => /nl[-_]NL/i.test(x.lang) && x.localService) || v.find(x => x.localService) || v[0] || null;
+  const list = dutchVoices(), pick = state.settings.voice;
+  return (pick && pick !== "auto" && list.find(v => v.voiceURI === pick)) || list[0] || null;
+}
+function populateVoices() {
+  if (!TTS) return;
+  const sel = $("optVoice"), list = dutchVoices();
+  sel.innerHTML = `<option value="auto">Auto (best available)</option>` +
+    list.map(v => `<option value="${esc(v.voiceURI)}">${esc(v.name)}${v.localService ? "" : " ☁"}</option>`).join("");
+  sel.value = list.some(v => v.voiceURI === state.settings.voice) ? state.settings.voice : "auto";
 }
 function speak(text) {
   if (!TTS || !text) return;
@@ -364,7 +402,7 @@ function speak(text) {
   u.rate = 0.9;
   speechSynthesis.speak(u);
 }
-if (TTS) speechSynthesis.getVoices(); // starts loading the voice list
+if (TTS) { speechSynthesis.getVoices(); speechSynthesis.addEventListener("voiceschanged", populateVoices); }
 
 const sayBtn = (what, label) => `<button class="say" type="button" data-say="${what}">${label}</button>`;
 function sayRow(c) {
@@ -386,16 +424,14 @@ function render() {
   if (c) {
     const star = c.freq ? `<span class="star" title="Frequent verb">★</span>` : "";
     const ex = sentenceHTML(c);
-    let front, back;
+    const back = `<span class="tag">Answer</span>${star}<div class="big" style="margin-bottom:16px;color:var(--accent)">${esc(c.eng)}</div>${formsHTML(c)}${sayRow(c)}${ex}`;
+    let front;
     if (mode === "nl-en") {
       front = `<span class="tag">Dutch</span>${star}<div class="big">${esc(c.inf)}</div>${sayBtn("inf", "🔊 Listen")}`;
-      back = `<span class="tag">Answer</span>${star}<div class="big" style="margin-bottom:16px;color:var(--accent)">${esc(c.eng)}</div>${formsHTML(c, false)}${sayRow(c)}${ex}`;
     } else if (mode === "en-nl") {
       front = `<span class="tag">English</span>${star}<div class="big">${esc(c.eng)}</div>`;
-      back = `<span class="tag">Answer</span>${star}<div class="big" style="margin-bottom:16px">${esc(c.inf)}</div>${formsHTML(c, false)}${sayRow(c)}${ex}`;
     } else {
       front = `<span class="tag">Past forms?</span>${star}<div class="big">${esc(c.inf)}</div><div class="sub">${esc(c.eng)}</div>${sayBtn("inf", "🔊 Listen")}`;
-      back = `<span class="tag">Answer</span>${star}<div class="big" style="margin-bottom:16px">${esc(c.inf)}</div>${formsHTML(c, true)}${sayRow(c)}${ex}`;
     }
     $("front").innerHTML = front + `<span class="hint">tap to flip</span>`;
     $("back").innerHTML = back;
@@ -460,10 +496,11 @@ cardEl.addEventListener("click", e => { if (swiped) { swiped = false; e.stopImme
 
 /* Settings */
 const dlg = $("settings");
-const opts = { mode: "optMode", sentence: "optSentence", freq: "optFreq", shuffle: "optShuffle", hideMastered: "optHideMastered" };
+const opts = { mode: "optMode", sentence: "optSentence", voice: "optVoice", freq: "optFreq", shuffle: "optShuffle", hideMastered: "optHideMastered" };
 function loadSettingsUI() {
   for (const [k, id] of Object.entries(opts)) {
-    const el = $(id); typeof state.settings[k] === "boolean" ? (el.checked = state.settings[k]) : (el.value = state.settings[k]);
+    const el = $(id); if (typeof state.settings[k] === "boolean") el.checked = state.settings[k];
+    else { el.value = state.settings[k]; if (el.value !== state.settings[k]) el.value = "auto"; }
   }
 }
 function applySettings() {
@@ -475,7 +512,7 @@ function applySettings() {
   current = pickNext(); render();
 }
 Object.values(opts).forEach(id => $(id).addEventListener("change", applySettings));
-$("openSettings").addEventListener("click", () => { loadSettingsUI(); dlg.showModal(); });
+$("openSettings").addEventListener("click", () => { populateVoices(); loadSettingsUI(); dlg.showModal(); });
 $("btnClose").addEventListener("click", () => dlg.close());
 $("btnReset").addEventListener("click", () => {
   if (confirm("Reset all progress?")) {
